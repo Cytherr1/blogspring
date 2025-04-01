@@ -1,0 +1,9 @@
+{
+	"Navbar": {
+		"home": "Home",
+		"blog": "Blog",
+		"about": "About",
+		"login": "Login",
+		"register": "Register"
+	}
+}

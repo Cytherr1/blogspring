@@ -1,0 +1,9 @@
+{
+	"Navbar": {
+		"home": "Ana Sayfa",
+		"blog": "Blog",
+		"about": "Hakkımızda",
+		"login": "Giriş",
+		"register": "Kayıt ol"
+	}
+}
