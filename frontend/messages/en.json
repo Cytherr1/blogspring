@@ -5,5 +5,13 @@
 		"about": "About",
 		"login": "Login",
 		"register": "Register"
-	}
+	},
+	"login": {
+		"title": "Login",
+		"username": "Username",
+		"password": "Password",
+		"loginButton": "Login",
+		"error": "Invalid username or password",
+		"forgotPassword": "Forgot password"
+	  }
 }
