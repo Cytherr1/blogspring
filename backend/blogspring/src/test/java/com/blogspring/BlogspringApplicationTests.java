@@ -1,10 +1,10 @@
-package com.blogspring.user_mngt_system;
+package com.blogspring;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class UserMngtSystemApplicationTests {
+class BlogspringApplicationTests {
 
 	@Test
 	void contextLoads() {
