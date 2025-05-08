@@ -16,7 +16,9 @@ const LoginPage = () => {
     e.preventDefault();
 
     // Send a request to the backend to verify credentials
-    const response = await fetch('http://localhost:8080/api/login', {
+    const locale = window.location.pathname.split('/')[1];  // Extract 'en' or 'tr' from URL
+    const response = await fetch(`http://localhost:8080/${locale}/login`, {
+
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -26,7 +28,9 @@ const LoginPage = () => {
 
     if (response.ok) {
       // Login successful, redirect to home page
-      router.push('/home');
+      const data = await response.json();
+      localStorage.setItem('userId', data.username);
+      router.push(`/${locale}`);
     } else {
       // Handle login failure (show error)
       setError(t('error'));
