@@ -1,8 +1,7 @@
 {
 	"Navbar": {
 		"home": "Home",
-		"blog": "Blog",
-		"about": "About",
+		"profile": "Profile",
 		"login": "Login",
 		"register": "Register"
 	},
