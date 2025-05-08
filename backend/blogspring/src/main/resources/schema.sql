@@ -4,7 +4,7 @@ CREATE TABLE credentials (
     password VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE posts (
+CREATE TABLE post (
     id INT AUTO_INCREMENT PRIMARY KEY,
     userid VARCHAR(255) NOT NULL,
     message VARCHAR(1000) NOT NULL
