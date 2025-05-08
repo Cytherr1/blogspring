@@ -1,8 +1,7 @@
 {
 	"Navbar": {
 		"home": "Ana Sayfa",
-		"blog": "Blog",
-		"about": "Hakkımızda",
+		"profile": "Profil",
 		"login": "Giriş",
 		"register": "Kayıt ol"
 	},
