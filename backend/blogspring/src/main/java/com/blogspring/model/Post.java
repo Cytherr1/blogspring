@@ -9,7 +9,7 @@ public class Post {
     @Id
     private Long id;
     private String message;
-    private String author;
+    private String userid;
 
     // Getters and Setters
     public Long getId() {
@@ -28,11 +28,11 @@ public class Post {
         this.message = message;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getUserid() {
+        return userid;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 }

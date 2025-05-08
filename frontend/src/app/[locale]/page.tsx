@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Button, Stack } from "@mantine/core";
+import { Button, Stack, Card, Text, Divider } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 import Postcard from "@/src/components/postcard";
 import Page from "@/src/components/ui/page";
@@ -23,9 +23,9 @@ export default function Home() {
         const formatted = postsFromDb.map((p: any) => ({
           id: p.id,
           message: p.message,
-          author: p.userid,
+          author: p.userid,  // Here we use 'userid' as 'author'
         }));
-        setData(formatted);
+        setData(formatted.sort((a: PostDataType, b: PostDataType) => b.id - a.id));
       });
   }, []);
 
@@ -43,7 +43,20 @@ export default function Home() {
           </Button>
         )}
         {data.map((post, index) => (
-          <Postcard key={index} post={post} />
+          <Card
+            key={index}
+            shadow="sm"
+            padding="lg"
+            style={{ width: "100%", marginBottom: "15px" }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Text style={{ fontWeight: 500 }}>{post.author}</Text>  {/* Displaying userid as 'author' */}
+            </div>
+            <Divider my="xs" />
+            <Text size="sm" color="dimmed">
+              {post.message}
+            </Text>
+          </Card>
         ))}
       </Stack>
     </Page>
