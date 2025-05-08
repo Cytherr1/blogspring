@@ -1,6 +1,6 @@
 "use client";
 
-import { Link } from "@/src/i18n/routing";
+import { Link, usePathname } from "@/src/i18n/routing";
 import {
   ActionIcon,
   Burger,
@@ -17,6 +17,8 @@ import {
 import { navData } from "../lib/data"; 
 import { useDisclosure, useHeadroom } from "@mantine/hooks";
 import { IconMoon } from "@tabler/icons-react";
+import { useLocale } from "next-intl";
+import { useRouter } from "next/navigation";
 
 interface NavbarProps {
   session: any | null;
@@ -24,6 +26,9 @@ interface NavbarProps {
 
 export default function Navbar({ session }: NavbarProps) {
   const pinned = useHeadroom({ fixedAt: 120 });
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
   const { setColorScheme } = useMantineColorScheme();
   const computedColorScheme = useComputedColorScheme("light", {
     getInitialValueInEffect: true,
@@ -69,7 +74,6 @@ export default function Navbar({ session }: NavbarProps) {
                   {e.name}
                 </Button>
               ))}
-
               {session ? (
                 <Button variant="default" component={Link} href="/profile">
                   Profile
@@ -81,6 +85,12 @@ export default function Navbar({ session }: NavbarProps) {
           </Grid.Col>
           <Grid.Col span={{ lg: 4, sm: 3 }}>
             <Group justify="flex-end">
+              <Button
+                variant="default"
+                onClick={() => {router.push(`/${locale == "tr" ? "en" : "tr"}${pathname}`)}}
+              >
+                {locale.toLocaleUpperCase()}
+              </Button>
               {session ? (
                 <Button
                   variant="default"

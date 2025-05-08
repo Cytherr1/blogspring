@@ -12,6 +12,7 @@
     "@mantine/core": "^7.17.0",
     "@mantine/hooks": "^7.17.0",
     "@tabler/icons-react": "^3.31.0",
+    "ky": "^1.8.1",
     "next": "^15.2.4",
     "next-intl": "^3.26.5",
     "react": "^19.0.0",
