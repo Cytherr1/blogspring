@@ -1,22 +1,26 @@
 {
-	"Navbar": {
-		"home": "Home",
+	"navbar": {
+		"login": "Log in",
+		"logout": "Log out",
 		"profile": "Profile",
-		"login": "Login",
-		"register": "Register"
+		"home": "Home",
+		"menu": "Menu"
 	},
 	"login": {
-		"title": "Login",
+		"title": "Log in",
 		"username": "Username",
 		"password": "Password",
-		"loginButton": "Login",
-		"error": "Invalid username or password",
-		"forgotPassword": "Forgot password"
+		"loginButton": "Log in",
+		"error": "Incorrect username or password.",
+		"forgotPassword": "Forgot Password"
 	  },
 	"createpost":{
 
 	},
 	"home":{
-		"createPost":"Create post"
-	}
+		"createPost":"Create post",
+		"onlyUsersCanCreate": "Only logged in users can create posts.",
+		"login": "Log in"
 }
+}
+

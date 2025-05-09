@@ -1,9 +1,10 @@
 {
-	"Navbar": {
-		"home": "Ana Sayfa",
+	"navbar": {
+		"login": "Giriş yap",
+		"logout": "Çıkış yap",
 		"profile": "Profil",
-		"login": "Giriş",
-		"register": "Kayıt ol"
+		"home": "Ana sayfa",
+		"menu": "Menü"
 	},
 	"login": {
 		"title": "Giriş Yap",
@@ -17,7 +18,9 @@
 
 	},
 	"home":{
-		"createPost":"Gönderi oluştur"
-	}
-
+		"createPost":"Gönderi oluştur",
+		"onlyUsersCanCreate": "Sadece kullanıcılar gönderi oluşturablir.",
+  		"login": "Giriş yap"
 }
+}
+
