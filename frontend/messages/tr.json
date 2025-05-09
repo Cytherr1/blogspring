@@ -12,5 +12,12 @@
 		"loginButton": "Giriş Yap",
 		"error": "Geçersiz kullanıcı adı veya şifre",
 		"forgotPassword": "Şifremi unuttum"
-	  }
+	  },
+	"createpost":{
+
+	},
+	"home":{
+		"createPost":"Gönderi oluştur"
+	}
+
 }

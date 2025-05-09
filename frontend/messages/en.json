@@ -12,5 +12,11 @@
 		"loginButton": "Login",
 		"error": "Invalid username or password",
 		"forgotPassword": "Forgot password"
-	  }
+	  },
+	"createpost":{
+
+	},
+	"home":{
+		"createPost":"Create post"
+	}
 }

@@ -7,10 +7,12 @@ import Postcard from "@/src/components/postcard";
 import Page from "@/src/components/ui/page";
 import { Link } from "@/src/i18n/routing";
 import { PostDataType } from "@/src/lib/types";
+import { useTranslations } from 'next-intl';
 
 export default function Home() {
   const [data, setData] = useState<PostDataType[]>([]);
   const [userId, setUserId] = useState<string | null>(null);
+  const t = useTranslations('home'); // Section name: 'home'
 
   useEffect(() => {
     const locale = window.location.pathname.split("/")[1];
@@ -23,7 +25,7 @@ export default function Home() {
         const formatted = postsFromDb.map((p: any) => ({
           id: p.id,
           message: p.message,
-          author: p.userid,  // Here we use 'userid' as 'author'
+          author: p.userid,
         }));
         setData(formatted.sort((a: PostDataType, b: PostDataType) => b.id - a.id));
       });
@@ -39,7 +41,7 @@ export default function Home() {
             variant="default"
             rightSection={<IconPlus size={14} />}
           >
-            Create post
+            {t('createPost')}
           </Button>
         )}
         {data.map((post, index) => (
@@ -50,7 +52,7 @@ export default function Home() {
             style={{ width: "100%", marginBottom: "15px" }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Text style={{ fontWeight: 500 }}>{post.author}</Text>  {/* Displaying userid as 'author' */}
+              <Text style={{ fontWeight: 500 }}>{post.author}</Text>
             </div>
             <Divider my="xs" />
             <Text size="sm" color="dimmed">
