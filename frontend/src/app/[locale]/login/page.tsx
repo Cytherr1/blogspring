@@ -32,7 +32,9 @@ const LoginPage = () => {
       // Login successful, redirect to home page
       const data = await response.json();
       localStorage.setItem('userId', data.username);
-      redirect({href: "/", locale});
+      window.location.href = `/${locale}/`;
+
+
     } else {
       // Handle login failure (show error)
       setError(t('error'));
