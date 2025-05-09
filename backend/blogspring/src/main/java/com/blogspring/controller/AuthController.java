@@ -5,7 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +15,8 @@ import com.blogspring.model.Credentials;
 import com.blogspring.repository.CredentialsRepository;
 
 @RestController
-@RequestMapping("/{locale}")
+@CrossOrigin
+@RequestMapping("/auth")
 public class AuthController {
 
     @Autowired
@@ -23,7 +24,6 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(
-        @PathVariable String locale,  // Capture the locale from the URL
         @RequestBody Map<String, String> body) {
 
         String username = body.get("username");

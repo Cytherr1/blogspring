@@ -1,6 +1,6 @@
 "use client";
 
-import { Link, usePathname } from "@/src/i18n/routing";
+import { Link, redirect, usePathname } from "@/src/i18n/routing";
 import {
   ActionIcon,
   Burger,
@@ -19,12 +19,10 @@ import { useDisclosure, useHeadroom } from "@mantine/hooks";
 import { IconMoon } from "@tabler/icons-react";
 import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/auth";
 
-interface NavbarProps {
-  session: any | null;
-}
-
-export default function Navbar({ session }: NavbarProps) {
+export default function Navbar() {
   const pinned = useHeadroom({ fixedAt: 120 });
   const locale = useLocale();
   const router = useRouter();
@@ -34,6 +32,7 @@ export default function Navbar({ session }: NavbarProps) {
     getInitialValueInEffect: true,
   });
 
+  const session = useContext(AuthContext);
   const [opened, { close, toggle }] = useDisclosure(false);
 
   return (
@@ -94,7 +93,11 @@ export default function Navbar({ session }: NavbarProps) {
               {session ? (
                 <Button
                   variant="default"
-                  onClick={() => {console.log("signed out")}}
+                  onClick={() => {
+                    localStorage.removeItem("userId");
+                    location.reload();
+                    return false;
+                  }}
                 >
                   Log out
                 </Button>
@@ -189,7 +192,11 @@ export default function Navbar({ session }: NavbarProps) {
               {session ? (
                 <Button
                   variant="default"
-                  onClick={() => {console.log("signed out")}}
+                  onClick={() => {
+                    localStorage.removeItem("userId");
+                    location.reload();
+                    return false;
+                  }}
                 >
                   Log out
                 </Button>

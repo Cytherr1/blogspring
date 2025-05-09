@@ -7,6 +7,7 @@ import {routing} from '@/src/i18n/routing';
 import "@mantine/core/styles.css";
 import Navbar from "@/src/components/navbar";
 import Footer from "@/src/components/footer";
+import { AuthProvider } from "@/src/contexts/auth";
 
 export const metadata: Metadata = {
   title: "BlogSpring",
@@ -22,7 +23,6 @@ export default async function LocaleLayout({
 
 }) {
   const {locale} = await params
-
   // Ensure that the incoming `locale` is valid
   if (!routing.locales.includes(locale as any)) {
     notFound();
@@ -40,9 +40,11 @@ export default async function LocaleLayout({
       <body>
         <NextIntlClientProvider messages={messages}>
           <MantineProvider>
-            <Navbar session={null}/>
-            {children}
-            <Footer/>
+            <AuthProvider>
+              <Navbar/>
+                {children}
+              <Footer/>
+            </AuthProvider>
           </MantineProvider>
         </NextIntlClientProvider>
       </body>

@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';  // Import useRouter from next/navigation
 import { useTranslations } from 'next-intl';  // Import useTranslations for i18n
 import Link from 'next/link';
+import { redirect } from '@/src/i18n/routing';
+import Page from '@/src/components/ui/page';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
@@ -17,7 +19,7 @@ const LoginPage = () => {
 
     // Send a request to the backend to verify credentials
     const locale = window.location.pathname.split('/')[1];  // Extract 'en' or 'tr' from URL
-    const response = await fetch(`http://localhost:8080/${locale}/login`, {
+    const response = await fetch(`http://localhost:8080/auth/login`, {
 
       method: 'POST',
       headers: {
@@ -30,7 +32,7 @@ const LoginPage = () => {
       // Login successful, redirect to home page
       const data = await response.json();
       localStorage.setItem('userId', data.username);
-      router.push(`/${locale}`);
+      redirect({href: "/", locale});
     } else {
       // Handle login failure (show error)
       setError(t('error'));
@@ -38,38 +40,40 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
-      <h1>{t('title')}</h1>
-      <form onSubmit={handleLogin}>
-        <div>
-          <label htmlFor="username">{t('username')}</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="password">{t('password')}</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit">{t('loginButton')}</button>
-      </form>
+    <Page>
       <div>
-        <Link href="/forgot-password">{t('forgotPassword')}</Link>
+        <h1>{t('title')}</h1>
+        <form onSubmit={handleLogin}>
+          <div>
+            <label htmlFor="username">{t('username')}</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="password">{t('password')}</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          <button type="submit">{t('loginButton')}</button>
+        </form>
+        <div>
+          <Link href="/forgot-password">{t('forgotPassword')}</Link>
+        </div>
       </div>
-    </div>
+    </Page>
   );
 };
 

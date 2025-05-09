@@ -6,12 +6,12 @@ export default function Postcard({ post } : {
   post : PostDataType }) {
 
   return (
-	  <Card shadow="sm" mah="15vh" padding="lg" radius="md" withBorder component={Link} href={`post/${post.id}`}>
+	  <Card shadow="sm" w="500px" mah="15vh" padding="lg" radius="md" withBorder component={Link} href={`/post/${post.id}`}>
       <Text fw={500}>
         {post.message}
       </Text>
       <Group justify="space-between" mt="md" mb="xs">
-        <Text size="sm" c="dimmed">{post.author}</Text>
+        <Text size="sm" c="dimmed">{post.userid}</Text>
       </Group>
     </Card>
   )

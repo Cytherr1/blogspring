@@ -1,64 +1,47 @@
 "use client";
-
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button, Stack, Card, Text, Divider } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 import Postcard from "@/src/components/postcard";
 import Page from "@/src/components/ui/page";
 import { Link } from "@/src/i18n/routing";
 import { PostDataType } from "@/src/lib/types";
-import { useTranslations } from 'next-intl';
+import ky from "ky";
+import { AuthContext } from "@/src/contexts/auth";
 
 export default function Home() {
   const [data, setData] = useState<PostDataType[]>([]);
-  const [userId, setUserId] = useState<string | null>(null);
-  const t = useTranslations('home'); // Section name: 'home'
+  const auth = useContext(AuthContext);
 
   useEffect(() => {
-    const locale = window.location.pathname.split("/")[1];
-    const storedUserId = localStorage.getItem("userId");
-    setUserId(storedUserId);
-
-    fetch(`http://localhost:8080/${locale}/posts`)
-      .then((res) => res.json())
-      .then((postsFromDb) => {
-        const formatted = postsFromDb.map((p: any) => ({
-          id: p.id,
-          message: p.message,
-          author: p.userid,
-        }));
-        setData(formatted.sort((a: PostDataType, b: PostDataType) => b.id - a.id));
-      });
+    async function fetchData() {
+      try {
+        const response = await ky.get("http://localhost:8080/posts/getAllPosts").json() as PostDataType[]
+        setData(response)
+      } catch (error) {
+        alert(error)
+      }
+    }
+    fetchData();
   }, []);
 
   return (
     <Page>
       <Stack align="center" justify="start" w="100%" p="lg">
-        {userId && (
+        {
+          auth ?
           <Button
             component={Link}
             href="/createpost"
             variant="default"
             rightSection={<IconPlus size={14} />}
           >
-            {t('createPost')}
-          </Button>
-        )}
-        {data.map((post, index) => (
-          <Card
-            key={index}
-            shadow="sm"
-            padding="lg"
-            style={{ width: "100%", marginBottom: "15px" }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Text style={{ fontWeight: 500 }}>{post.author}</Text>
-            </div>
-            <Divider my="xs" />
-            <Text size="sm" color="dimmed">
-              {post.message}
-            </Text>
-          </Card>
+            Create post
+          </Button> :
+          <Text>Only users can create posts <Link href="/login">login</Link></Text>
+        }
+        {data.map((post, i) => (
+          <Postcard key={i} post={post}/>
         ))}
       </Stack>
     </Page>
