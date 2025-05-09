@@ -14,10 +14,10 @@ import {
   useComputedColorScheme,
   useMantineColorScheme,
 } from "@mantine/core";
-import { navData } from "../lib/data";
+import { navData } from "../lib/data"; 
 import { useDisclosure, useHeadroom } from "@mantine/hooks";
 import { IconMoon } from "@tabler/icons-react";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
 
 interface NavbarProps {
@@ -27,7 +27,6 @@ interface NavbarProps {
 export default function Navbar({ session }: NavbarProps) {
   const pinned = useHeadroom({ fixedAt: 120 });
   const locale = useLocale();
-  const t = useTranslations("Navbar");
   const router = useRouter();
   const pathname = usePathname();
   const { setColorScheme } = useMantineColorScheme();
@@ -52,7 +51,6 @@ export default function Navbar({ session }: NavbarProps) {
           backgroundColor: "var(--mantine-color-body)",
         }}
       >
-        {/* Desktop Navbar */}
         <Grid
           align="center"
           display={
@@ -73,13 +71,15 @@ export default function Navbar({ session }: NavbarProps) {
                   href={e.link}
                   key={i}
                 >
-                  {t(e.name)}
+                  {e.name}
                 </Button>
               ))}
-              {session && (
+              {session ? (
                 <Button variant="default" component={Link} href="/profile">
-                  {t("profile")}
+                  Profile
                 </Button>
+              ) : (
+                <></>
               )}
             </Group>
           </Grid.Col>
@@ -87,19 +87,20 @@ export default function Navbar({ session }: NavbarProps) {
             <Group justify="flex-end">
               <Button
                 variant="default"
-                onClick={() => {
-                  router.push(`/${locale === "tr" ? "en" : "tr"}${pathname}`);
-                }}
+                onClick={() => {router.push(`/${locale == "tr" ? "en" : "tr"}${pathname}`)}}
               >
                 {locale.toLocaleUpperCase()}
               </Button>
               {session ? (
-                <Button variant="default" onClick={() => console.log("signed out")}>
-                  {t("logout")}
+                <Button
+                  variant="default"
+                  onClick={() => {console.log("signed out")}}
+                >
+                  Log out
                 </Button>
               ) : (
                 <Button variant="default" component={Link} href="/login">
-                  {t("login")}
+                  Log In
                 </Button>
               )}
               <ActionIcon
@@ -116,8 +117,6 @@ export default function Navbar({ session }: NavbarProps) {
             </Group>
           </Grid.Col>
         </Grid>
-
-        {/* Mobile Navbar */}
         <Grid
           align="center"
           display={
@@ -137,12 +136,11 @@ export default function Navbar({ session }: NavbarProps) {
             <Title order={2}>BlogSpring</Title>
           </Grid.Col>
         </Grid>
-
         <Drawer
           opened={opened}
           onClose={close}
           size="xs"
-          title={t("menu")}
+          title="Menu"
           overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
           display={
             session
@@ -160,18 +158,20 @@ export default function Navbar({ session }: NavbarProps) {
                   href={e.link}
                   key={i}
                 >
-                  {t(e.name)}
+                  {e.name}
                 </Button>
               ))}
-              {session && (
+              {session ? (
                 <Button
                   variant="default"
                   onClick={close}
                   component={Link}
                   href="/profile"
                 >
-                  {t("profile")}
+                  Profile
                 </Button>
+              ) : (
+                <></>
               )}
             </Stack>
             <Group justify="space-between">
@@ -187,8 +187,11 @@ export default function Navbar({ session }: NavbarProps) {
                 <IconMoon stroke={1.5} />
               </ActionIcon>
               {session ? (
-                <Button variant="default" onClick={() => console.log("signed out")}>
-                  {t("logout")}
+                <Button
+                  variant="default"
+                  onClick={() => {console.log("signed out")}}
+                >
+                  Log out
                 </Button>
               ) : (
                 <Button
@@ -197,7 +200,7 @@ export default function Navbar({ session }: NavbarProps) {
                   component={Link}
                   href="/login"
                 >
-                  {t("login")}
+                  Log in
                 </Button>
               )}
             </Group>
